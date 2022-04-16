@@ -24,22 +24,22 @@ namespace BlockChane
             PrevHash = "111111";
             User = "Admin";
 
-            var blockData = GetData(); 
+            var blockData = GetData();
             Hash = GetHash(blockData);
         }
-        public Block(string data,string user, Block block)
+        public Block(string data, string user, Block block)
         {
             if (string.IsNullOrEmpty(data))
             {
                 throw new ArgumentNullException("Empty argument data", nameof(data));
             }
 
-            if(block == null)
+            if (block == null)
             {
                 throw new ArgumentNullException("Empty argument block", nameof(block));
             }
 
-            if(string.IsNullOrEmpty(user))
+            if (string.IsNullOrEmpty(user))
             {
                 throw new ArgumentNullException("Empty argument user", nameof(user));
             }
@@ -78,6 +78,10 @@ namespace BlockChane
                 hex += String.Format("{0:x2}", x);
             }
             return hex;
+        }
+        public override string ToString()
+        {
+            return Data;
         }
     }
 }

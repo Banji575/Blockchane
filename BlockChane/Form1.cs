@@ -16,5 +16,29 @@ namespace BlockChane
         {
             InitializeComponent();
         }
+
+        private Chaine _chaine = new Chaine();
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+
+            _chaine.Add(textBox1.Text, "Admin");
+
+            foreach (var block in _chaine.Blocks)
+            {
+                listBox1.Items.Add(block.ToString());
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            foreach (var block in _chaine.Blocks)
+            {
+                listBox1.Items.Add(block.ToString());
+            }
+        }
     }
 }
