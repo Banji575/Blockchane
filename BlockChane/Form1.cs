@@ -33,6 +33,8 @@ namespace BlockChane
 
         }
 
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             foreach (var block in _chaine.Blocks)
