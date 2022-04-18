@@ -13,11 +13,21 @@ namespace BlockChane
         public Block Last { get; private set; }
         public Chaine()
         {
-            Blocks = new List<Block>();
-            var genesisBlock = new Block();
+            Blocks = LoadChainFromDB();
 
-            Blocks.Add(genesisBlock);
-            Last = genesisBlock;
+            if(Blocks.Count == 0)
+            {
+                var genesisBlock = new Block();
+
+                Blocks.Add(genesisBlock);
+                Last = genesisBlock;
+                Save(Last);
+            }
+            else
+            {
+                Last = Blocks.Last();
+            }
+           
         }
 
         public void Add(string data, string user)
@@ -54,6 +64,18 @@ namespace BlockChane
                 db.Blocks.Add(block);
                 db.SaveChanges();
             }
+        }
+        private List<Block> LoadChainFromDB()
+        {
+            List<Block> result;
+            using(var db = new BlockchainContext())
+            {
+                var count = db.Blocks.Count();
+                result = new List<Block>(count * 2);
+                result.AddRange(db.Blocks);
+            }
+
+            return result;
         }
     }
 }
