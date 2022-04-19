@@ -25,7 +25,15 @@ namespace BlockChane
             }
             else
             {
-                Last = Blocks.Last();
+                if (Check())
+                {
+                    Last = Blocks.Last();
+                }
+                else
+                {
+                    throw new Exception("Error get blocks from database. Chain does't check");
+                }
+               
             }
            
         }
@@ -41,7 +49,7 @@ namespace BlockChane
 
         public bool Check()
         {
-            Block genesisBlock = new Block();
+            Block genesisBlock = Blocks[0];
             var previousHash = genesisBlock.Hash;
 
             foreach (var block in Blocks.Skip(1))

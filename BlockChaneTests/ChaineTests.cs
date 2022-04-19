@@ -18,7 +18,7 @@ namespace BlockChane.Tests
             chain.Add(";lkjsdfskjdf", "Admin");
             chain.Add("fjkals;fjasf", "het");
 
-            Assert.IsTrue(chain.Check());
+             Assert.IsTrue(chain.Check());
         }
     }
 }
