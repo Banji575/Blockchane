@@ -63,6 +63,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BlockTests.cs" />
     <Compile Include="ChaineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -85,5 +85,12 @@ namespace BlockChane
 
             return result;
         }
+
+        private void Sync()
+        {
+
+        }
+
+     
     }
 }

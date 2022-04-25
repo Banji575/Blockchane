@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace BlockChane
 {
+
+    [DataContract]
     public class Block
     {
         public int Id { get; private set; }
+
+        [DataMember]
         public string Data { get; private set; }
+
+        [DataMember]
         public DateTime Created { get; private set; }
+
+        [DataMember]
         public string Hash { get; private set; }
+
+        [DataMember]
         public string PrevHash { get; private set; }
+
+        [DataMember]
         public string User { get; private set; }
 
         public Block()
@@ -82,6 +97,26 @@ namespace BlockChane
         public override string ToString()
         {
             return Data;
+        }
+        public string Serialize()
+        {
+            var jsonSerializer = new DataContractJsonSerializer(typeof(Block));
+
+            using (var ms = new MemoryStream())
+            {
+                jsonSerializer.WriteObject(ms, this);
+                return Encoding.UTF8.GetString(ms.ToArray());
+            }
+        }
+
+        public static Block Deserilize(string json)
+        {
+            var jsonSeriliazer = new DataContractJsonSerializer(typeof(Block));
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            {
+                return (Block)jsonSeriliazer.ReadObject(ms);
+
+            }
         }
     }
 }
